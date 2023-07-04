@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { getDistanceFromLatLonInKm } from './utils';
 import PlaceCard from './Components/PlaceCard/PlaceCard';
+import PlacePage from './Components/PlacePage/PlacePage'; // import your new component
 import he from 'he';
 
 function App() {
@@ -8,7 +10,6 @@ function App() {
   const [userLocation, setUserLocation] = useState(null);
 
   useEffect(() => {
-    // Fetch data from API
     fetch('https://mathieumarcelino.com/fondationcdg/wp-json/wp/v2/posts?categories=6')
       .then(response => response.json())
       .then(fetchedData => {
@@ -22,7 +23,6 @@ function App() {
         })));
       });
 
-    // Get user location
     navigator.geolocation.getCurrentPosition(position => {
       setUserLocation({
         latitude: position.coords.latitude,
@@ -33,7 +33,6 @@ function App() {
 
   useEffect(() => {
     if (userLocation !== null) {
-      // Calculate distances and sort
       setData(currentData =>
         currentData.map(item => ({
           ...item,
@@ -48,12 +47,18 @@ function App() {
     }
   }, [userLocation]);
   return (
-    <div className='list'>
-      {data.map((item, index) => (
-        <PlaceCard title={item.title} description={item.description} image={item.image} distance={item.distance} city={item.city}>
-        </PlaceCard>
-      ))}
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={
+          <div className='list'>
+            {data.map((item, index) => (
+              <PlaceCard id={index} title={item.title} description={item.description} image={item.image} distance={item.distance} city={item.city} />
+            ))}
+          </div>
+        } />
+        <Route path="/place/:id" element={<PlacePage data={data} />} />
+      </Routes>
+    </Router>
   );
 }
 

@@ -7,7 +7,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background: #f1f2f6;
   color: #2f3542;
-  padding-top: 20px;
 }
 
 code {
@@ -30,6 +29,10 @@ code {
 
 @media screen and (max-width: 768px) {
   .list{
-    width: 100%;
+    width: 100% !important;
+  }
+
+  .page{
+    max-width: 100vw !important;
   }
 }

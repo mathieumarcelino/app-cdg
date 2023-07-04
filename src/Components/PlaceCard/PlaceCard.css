@@ -5,6 +5,11 @@
     background: #ffffff;
     border-radius: 16px;
     margin-bottom: 24px;
+    cursor: pointer;
+}
+
+.card:nth-child(1){
+    margin-top: 24px;
 }
 
 .card-img {
