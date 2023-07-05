@@ -1,4 +1,4 @@
-# PWA Fondation Charles de Gaulle
+# PWA - Fondation Charles de Gaulle
 
 ## Link
 [app-cdg.mathieumarcelino.com](https://app-cdg.mathieumarcelino.com/)
